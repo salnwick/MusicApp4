@@ -12,13 +12,17 @@ public class Menu {
 
 	private Scanner scanner = new Scanner(System.in);
 	private List<String> options = Arrays.asList(
-			"Display all Tracks",
-			"Display Tracks by Artist",
-			"Display Tracks by Album",
+			"Display Tracks",
+			"Display Artists",
+			"Display Albums",
 			"Add New Artist",
 			"Add New Album",
 			"Add New Track",
+			"Update Album",
+			"Update Artist",
 			"Update Track",
+			"Delete Album",
+			"Delete Artist",
 			"Delete Track"
 			);
 	private	TracksDao tracksDao = new TracksDao();	
@@ -32,11 +36,11 @@ public class Menu {
 			selection = scanner.nextLine();
 		try {		
 			if (selection.equals("1")) {
-					displayAllTracks();
+					displayTracks();
 			} else if (selection.equals("2")) {
-//					displayByAlbum();
+//					displayAlbums();
 			} else if (selection.equals("3")) {
-//					displayByArtist();	
+//					displayArtists();	
 			} else if (selection.equals("4")) {
 //					addArtist();
 			} else if (selection.equals("5")) {
@@ -44,10 +48,18 @@ public class Menu {
 			} else if (selection.equals("6")) {
 //					addTrack();
 			} else if (selection.equals("7")) {
-//					updateTrack();
+//					updateAlbum();
 			}else if (selection.equals("8")) {
+//					UpdateArtist();
+			} else if (selection.equals("9")) {
+//					UpdateTrack();
+			}else if (selection.equals("10")) {
+//					deleteAlbum();
+			}else if (selection.equals("11")) {
+//					deleteArtist();
+			}else if (selection.equals("12")) {
 //					deleteTrack();
-			} else selection = "-1";
+			}else selection = "-1";
 			}catch (SQLException e) {
 				e.printStackTrace();
 				end();
@@ -67,7 +79,7 @@ public class Menu {
 	
 	}
 	
-	private void displayAllTracks() throws SQLException {
+	private void displayTracks() throws SQLException {
 		List<Tracks> myTracks = tracksDao.getAllTracks();
 		System.out.println("All Tracks:\n-------------------------");
 		for (Tracks t:myTracks) {
