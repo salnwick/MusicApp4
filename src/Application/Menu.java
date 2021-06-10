@@ -5,16 +5,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import dao.AlbumsDao;
+import dao.ArtistsDao;
 import dao.TracksDao;
+import entity.Albums;
+import entity.Artists;
 import entity.Tracks;
 
 public class Menu {
 
 	private Scanner scanner = new Scanner(System.in);
 	private List<String> options = Arrays.asList(
-			"Display Tracks",
 			"Display Artists",
 			"Display Albums",
+			"Display Tracks",
 			"Add New Artist",
 			"Add New Album",
 			"Add New Track",
@@ -26,7 +30,8 @@ public class Menu {
 			"Delete Track"
 			);
 	private	TracksDao tracksDao = new TracksDao();	
-	
+	private AlbumsDao albumsDao = new AlbumsDao();
+	private ArtistsDao artistsDao = new ArtistsDao();
 	
 	public void start() {
 		String selection = "";
@@ -36,11 +41,11 @@ public class Menu {
 			selection = scanner.nextLine();
 		try {		
 			if (selection.equals("1")) {
-					displayTracks();
+					displayArtists();
 			} else if (selection.equals("2")) {
-//					displayAlbums();
+					displayAlbums();
 			} else if (selection.equals("3")) {
-//					displayArtists();	
+					displayTracks();	
 			} else if (selection.equals("4")) {
 //					addArtist();
 			} else if (selection.equals("5")) {
@@ -79,8 +84,24 @@ public class Menu {
 	
 	}
 	
+	private void displayArtists() throws SQLException {
+		List<Artists> myArtists = artistsDao.getArtists();
+		System.out.println("All Artists:\n------------------------");
+		for (Artists ar:myArtists) {
+			System.out.println(ar.getArtist_id() + " " + ar.getArtist());
+		}
+	}
+	
+	private void displayAlbums() throws SQLException {
+		List<Albums> myAlbums = albumsDao.getAlbums();
+		System.out.println("All Albums:\n------------------------");
+		for (Albums a:myAlbums) {
+			System.out.println(a.getAlbum_id() + " " + a.getAlbum());
+		}
+	}
+	
 	private void displayTracks() throws SQLException {
-		List<Tracks> myTracks = tracksDao.getAllTracks();
+		List<Tracks> myTracks = tracksDao.getTracks();
 		System.out.println("All Tracks:\n-------------------------");
 		for (Tracks t:myTracks) {
 			System.out.println(t.getTrack_id() + " " + t.getTrack());

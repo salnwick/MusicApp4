@@ -17,7 +17,7 @@ public class TracksDao {
 		connection = DBConnection.getInstance().getConnection();
 	}
 	
-	public List<Tracks> getAllTracks() throws SQLException {
+	public List<Tracks> getTracks() throws SQLException {
 		List<Tracks> out = new ArrayList<>();
 		ResultSet rs = connection.prepareStatement(ALL_TRACKS_QUERY).executeQuery();
 		while (rs.next()) {
@@ -25,6 +25,7 @@ public class TracksDao {
 		}
 		return out;
 	}
+	
 public void close() {
 	DBConnection.getInstance().closeConnection();
 }

@@ -11,11 +11,9 @@ public class Artists {
 	private List<Albums> albums;
 	private List<Tracks> tracks;
 	
-	public Artists(int artist_id, String artist, List<Albums> albums, List<Tracks> tracks) {
+	public Artists(int artist_id, String artist) {
 		this.setArtist_id(artist_id);
 		this.setArtist(artist);
-		this.setAlbums(albums);
-		this.setTracks(tracks);
 	}
 
 	public int getArtist_id() {
