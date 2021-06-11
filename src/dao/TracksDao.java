@@ -14,6 +14,7 @@ public class TracksDao {
 	private Connection connection;
 	private final String ALL_TRACKS_QUERY = "select * from tracks";
 	private final String CREATE_TRACK_QUERY = "insert into Tracks (track, album_id, artist_id) values (?, ?, ?);";
+	private final String DELETE_TRACKS_BY_TRACK_ID_QUERY = "Delete From Tracks WHERE track_id = ?";
 	
 	public TracksDao() {
 		connection = DBConnection.getInstance().getConnection();
@@ -36,7 +37,13 @@ public class TracksDao {
 		ps.executeUpdate();
 	}
 	
-public void close() {
+	public void deleteTrack(int track_id) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement(DELETE_TRACKS_BY_TRACK_ID_QUERY);
+		ps.setInt(1, track_id);
+		ps.executeUpdate();
+	}
+		
+	public void close() {
 	DBConnection.getInstance().closeConnection();
-}
+	}
 }

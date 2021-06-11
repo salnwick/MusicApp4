@@ -59,9 +59,9 @@ public class Menu {
 			} else if (selection.equals("9")) {
 //					UpdateTrack();
 			}else if (selection.equals("10")) {
-//					deleteAlbum();
+					deleteAlbum();
 			}else if (selection.equals("11")) {
-//					deleteArtist();
+					deleteArtist();
 			}else if (selection.equals("12")) {
 //					deleteTrack();
 			}else selection = "-1";
@@ -156,9 +156,30 @@ public class Menu {
 		tracksDao.createTrack(name, id, arid);
 	}
 	
+	private void deleteAlbum() throws SQLException {
+		System.out.print("Enter Album ID to delete:");
+		int album_id = Integer.parseInt(scanner.nextLine());
+		albumsDao.deleteAlbum(album_id);
+	}
+
+	private void deleteArtist() throws SQLException {
+		System.out.print("Enter Artist Id to delete:");
+		int artist_id = Integer.parseInt(scanner.nextLine());
+		artistsDao.deleteArtist(artist_id);
+	}
+
+	private void deleteTrack() throws SQLException {
+		System.out.print("Enter make id to delete:");
+		int track_id = Integer.parseInt(scanner.nextLine());
+		tracksDao.deleteTrack(track_id);
+	}
+
+
+	
 	public void end() {
 		System.out.println("Bye!");
 		scanner.close();
 		tracksDao.close();	
 	}
+	
 }

@@ -11,14 +11,18 @@ import dao.DBConnection;
 import entity.Albums;
 import entity.Tracks;
 
+
 public class AlbumsDao {
 
+	
 	private Connection connection;
 	private final String ALL_ALBUMS_QUERY = "select * from albums;";
 	private final String CREATE_ALBUM_QUERY = "insert into Albums (album, artist_id) values (?, ?);";
+	private final String DELETE_ALBUMS_BY_ALBUM_ID_QUERY = "Delete From Albums WHERE album_id = ?";
 	
 	public AlbumsDao() {
 		connection = DBConnection.getInstance().getConnection();
+		
 	}
 
 	public List<Albums> getAlbums() throws SQLException{
@@ -34,6 +38,12 @@ public class AlbumsDao {
 		PreparedStatement ps = connection.prepareStatement(CREATE_ALBUM_QUERY);
 		ps.setString(1, name);
 		ps.setInt(2, artistId);
+		ps.executeUpdate();
+	}
+	
+	public void deleteAlbum(int album_id) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement(DELETE_ALBUMS_BY_ALBUM_ID_QUERY);
+		ps.setInt(1, album_id);
 		ps.executeUpdate();
 	}
 }
