@@ -47,11 +47,11 @@ public class Menu {
 			} else if (selection.equals("3")) {
 					displayTracks();	
 			} else if (selection.equals("4")) {
-//					addArtist();
+					addArtist();
 			} else if (selection.equals("5")) {
-//					addAlbum();
+					addAlbum();
 			} else if (selection.equals("6")) {
-//					addTrack();
+					addTrack();
 			} else if (selection.equals("7")) {
 //					updateAlbum();
 			}else if (selection.equals("8")) {
@@ -106,6 +106,54 @@ public class Menu {
 		for (Tracks t:myTracks) {
 			System.out.println(t.getTrack_id() + " " + t.getTrack());
 		}
+	}
+	
+	private void addArtist() throws SQLException {
+		System.out.print("Enter Name of Artist: ");
+		String name = scanner.nextLine();
+		artistsDao.createArtist(name);
+	}
+	
+	private void addAlbum() throws SQLException {
+		System.out.print("Enter Name of Album: ");
+		String name = scanner.nextLine();
+		System.out.print("Please enter Artist ID for Album: ");
+		displayArtists();
+		String artistId = scanner.nextLine();
+		Integer id = null;
+		try {
+			id = Integer.parseInt(artistId);
+		}catch (NumberFormatException e) {
+			System.out.println("Please enter an ID number....");
+			return;
+		}
+		albumsDao.createAlbum(name, id);
+	}
+	
+	private void addTrack() throws SQLException {
+		System.out.print("Enter Name of Track: ");
+		String name = scanner.nextLine();
+		System.out.print("Please enter Album ID for Track: ");
+		displayAlbums();
+		String albumId = scanner.nextLine();
+		Integer id = null;
+		try {
+			id = Integer.parseInt(albumId);
+		}catch (NumberFormatException e) {
+			System.out.println("Please enter an ID number....");
+			return;
+		}
+		System.out.print("Please enter Artist ID for Track: ");
+		displayArtists();
+		String artistId = scanner.nextLine();
+		Integer arid = null;
+		try {
+			arid = Integer.parseInt(artistId);
+		}catch (NumberFormatException e) {
+			System.out.println("Please enter an ID number....");
+			return;
+		}
+		tracksDao.createTrack(name, id, arid);
 	}
 	
 	public void end() {

@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class AlbumsDao {
 
 	private Connection connection;
 	private final String ALL_ALBUMS_QUERY = "select * from albums;";
+	private final String CREATE_ALBUM_QUERY = "insert into Albums (album, artist_id) values (?, ?);";
 	
 	public AlbumsDao() {
 		connection = DBConnection.getInstance().getConnection();
@@ -26,5 +28,12 @@ public class AlbumsDao {
 			outinfo.add(new Albums(rs.getInt("album_id"), rs.getString("album")));
 	}
 		return outinfo;
+	}
+
+	public void createAlbum(String name, int artistId) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement(CREATE_ALBUM_QUERY);
+		ps.setString(1, name);
+		ps.setInt(2, artistId);
+		ps.executeUpdate();
 	}
 }
