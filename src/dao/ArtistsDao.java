@@ -14,6 +14,7 @@ public class ArtistsDao {
 	private Connection connection;
 	private final String ALL_ARTISTS_QUERY = "select * from artists;";
 	private final String CREATE_ARTIST_QUERY = "insert into Artists (artist) values (?);";
+	private final String UPDATE_ARTIST_QUERY = "update artists set artist = ? where artist_id = ?;";
 	private final String DELETE_ARTIST_BY_ARTIST_ID_QUERY = "Delete From Artists WHERE artist_id = ?";
 	
 	public ArtistsDao() {
@@ -34,9 +35,21 @@ public class ArtistsDao {
 		ps.setString(1, name);
 		ps.executeUpdate();
 	}
+	
+	public void updateArtist(String name, Integer id) throws SQLException {
+		PreparedStatement ps = connection.prepareStatement(UPDATE_ARTIST_QUERY);
+		ps.setString(1, name);
+		ps.setInt(2, id);
+		ps.executeUpdate();
+	}
+	
 	public void deleteArtist(int artist_id) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement(DELETE_ARTIST_BY_ARTIST_ID_QUERY);
 		ps.setInt(1, artist_id);
 		ps.executeUpdate();
 	}
+	
+	public void close() {
+		DBConnection.getInstance().closeConnection();
+		}
 }

@@ -22,11 +22,11 @@ public class Menu {
 			"Add New Artist",
 			"Add New Album",
 			"Add New Track",
-			"Update Album",
-			"Update Artist",
-			"Update Track",
-			"Delete Album",
+			"Update Artist Name",
+			"Update Album Name",
+			"Update Track Name",
 			"Delete Artist",
+			"Delete Album",
 			"Delete Track"
 			);
 	private	TracksDao tracksDao = new TracksDao();	
@@ -53,15 +53,15 @@ public class Menu {
 			} else if (selection.equals("6")) {
 					addTrack();
 			} else if (selection.equals("7")) {
-//					updateAlbum();
+					updateArtist();
 			}else if (selection.equals("8")) {
-//					UpdateArtist();
+					updateAlbum();
 			} else if (selection.equals("9")) {
-//					UpdateTrack();
+					updateTrack();
 			}else if (selection.equals("10")) {
-					deleteAlbum();
-			}else if (selection.equals("11")) {
 					deleteArtist();
+			}else if (selection.equals("11")) {
+					deleteAlbum();
 			}else if (selection.equals("12")) {
 					deleteTrack();
 			}else selection = "-1";
@@ -156,16 +156,64 @@ public class Menu {
 		tracksDao.createTrack(name, id, arid);
 	}
 	
-	private void deleteAlbum() throws SQLException {
-		System.out.print("Enter Album ID to delete:");
-		int album_id = Integer.parseInt(scanner.nextLine());
-		albumsDao.deleteAlbum(album_id);
+	private void updateArtist() throws SQLException {
+		System.out.println("Which Artist ID would you like to update? ");
+		displayArtists();
+		String artistId = scanner.nextLine();
+		Integer id = null;
+		try {
+			id = Integer.parseInt(artistId);
+		}catch (NumberFormatException e) {
+			System.out.println("Please enter an ID number....");
+			return;
+		}
+		System.out.print("Enter new Artist Name: ");
+		String name = scanner.nextLine();
+		artistsDao.updateArtist(name, id);
 	}
-
+	
+	private void updateAlbum() throws SQLException {
+		System.out.println("Which Album ID would you like to update? ");
+		displayAlbums();
+		String albumId = scanner.nextLine();
+		Integer id = null;
+		try {
+			id = Integer.parseInt(albumId);
+		}catch (NumberFormatException e) {
+			System.out.println("Please enter an ID number....");
+			return;
+		}
+		System.out.print("Enter new Album Name: ");
+		String name = scanner.nextLine();
+		albumsDao.updateAlbum(name, id);
+	}
+	
+	private void updateTrack() throws SQLException {
+		System.out.println("Which Track ID would you like to update? ");
+		displayTracks();
+		String trackId = scanner.nextLine();
+		Integer id = null;
+		try {
+			id = Integer.parseInt(trackId);
+		}catch (NumberFormatException e) {
+			System.out.println("Please enter an ID number....");
+			return;
+		}
+		System.out.print("Enter new Track Name: ");
+		String name = scanner.nextLine();
+		tracksDao.updateTrack(name, id);
+	}
+	
 	private void deleteArtist() throws SQLException {
 		System.out.print("Enter Artist Id to delete:");
 		int artist_id = Integer.parseInt(scanner.nextLine());
 		artistsDao.deleteArtist(artist_id);
+	}
+	
+	private void deleteAlbum() throws SQLException {
+		System.out.print("Enter Album ID to delete:");
+		int album_id = Integer.parseInt(scanner.nextLine());
+		albumsDao.deleteAlbum(album_id);
 	}
 
 	private void deleteTrack() throws SQLException {
@@ -179,7 +227,7 @@ public class Menu {
 	public void end() {
 		System.out.println("Bye!");
 		scanner.close();
-		tracksDao.close();	
+		artistsDao.close();
 	}
 	
 }
