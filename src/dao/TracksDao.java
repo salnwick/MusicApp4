@@ -17,7 +17,7 @@ public class TracksDao {
 	private final String DELETE_TRACKS_BY_TRACK_ID_QUERY = "Delete From Tracks WHERE track_id = ?";
 	
 	public TracksDao() {
-		connection = DBConnection.getInstance().getConnection();
+		connection = DBConnection.getConnection();
 	}
 	
 	public List<Tracks> getTracks() throws SQLException {

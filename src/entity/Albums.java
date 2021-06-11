@@ -2,8 +2,6 @@ package entity;
 
 import java.util.List;
 
-import entity.Tracks;
-
 public class Albums {
 	private int album_id;
 	private String album;

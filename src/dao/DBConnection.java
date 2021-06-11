@@ -22,7 +22,7 @@ private static Scanner input = new Scanner(System.in);
 		return instance;
 	}
 	
-	public Connection getConnection() {
+	public static Connection getConnection() {
 		if (connection == null) {
 			try {
 				System.out.println("Please Enter Password");

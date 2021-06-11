@@ -2,9 +2,6 @@ package entity;
 
 import java.util.List;
 
-import entity.Albums;
-import entity.Tracks;
-
 public class Artists {
 	private int artist_id;
 	private String artist;

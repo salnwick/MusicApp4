@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.DBConnection;
-import entity.Albums;
 import entity.Artists;
 
 public class ArtistsDao {
@@ -19,7 +17,7 @@ public class ArtistsDao {
 	private final String DELETE_ARTIST_BY_ARTIST_ID_QUERY = "Delete From Artists WHERE artist_id = ?";
 	
 	public ArtistsDao() {
-		connection = DBConnection.getInstance().getConnection();
+		connection = DBConnection.getConnection();
 	
 	}
 	public List<Artists> getArtists() throws SQLException{

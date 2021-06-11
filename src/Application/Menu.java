@@ -63,7 +63,7 @@ public class Menu {
 			}else if (selection.equals("11")) {
 					deleteArtist();
 			}else if (selection.equals("12")) {
-//					deleteTrack();
+					deleteTrack();
 			}else selection = "-1";
 			}catch (SQLException e) {
 				e.printStackTrace();
