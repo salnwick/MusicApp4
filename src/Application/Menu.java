@@ -205,29 +205,62 @@ public class Menu {
 	}
 	
 	private void deleteArtist() throws SQLException {
-		System.out.print("Enter Artist Id to delete:");
-		int artist_id = Integer.parseInt(scanner.nextLine());
-		artistsDao.deleteArtist(artist_id);
+		System.out.println("To remove an Artist you must remove all tracks and albums connected. "
+				+ "\nWould you still like to remove the artist Y/N?");
+		String answer = scanner.nextLine();
+		if (!answer.equals("y")) {
+			return;
+		}else
+		System.out.print("Enter Artist ID to delete:");
+		displayArtists();
+		String artistId = scanner.nextLine();
+		Integer id = null;
+		try {
+			id = Integer.parseInt(artistId);
+		}catch (NumberFormatException e) {
+			System.out.println("Please enter an ID number....");
+			return;
+		}
+		artistsDao.deleteArtist(id);
 	}
 	
 	private void deleteAlbum() throws SQLException {
+		System.out.println("To remove an Album you must remove all tracks connected. "
+				+ "\nWould you still like to remove the album Y/N?");
+		String answer = scanner.nextLine();
+		if (!answer.equals("y")) {
+			return;
+		}else
 		System.out.print("Enter Album ID to delete:");
-		int album_id = Integer.parseInt(scanner.nextLine());
-		albumsDao.deleteAlbum(album_id);
+		displayAlbums();
+		String albumId = scanner.nextLine();
+		Integer id = null;
+		try {
+			id = Integer.parseInt(albumId);
+		}catch (NumberFormatException e) {
+			System.out.println("Please enter an ID number....");
+			return;
+		}
+		albumsDao.deleteAlbum(id);
 	}
 
 	private void deleteTrack() throws SQLException {
-		System.out.print("Enter make id to delete:");
-		int track_id = Integer.parseInt(scanner.nextLine());
-		tracksDao.deleteTrack(track_id);
+		System.out.print("Enter Track ID to delete:");
+		displayTracks();
+		String track_id = scanner.nextLine();
+		Integer id = null;
+		try {
+			id = Integer.parseInt(track_id);
+		}catch (NumberFormatException e) {
+			System.out.println("Please enter an ID number....");
+			return;
+		}
+		tracksDao.deleteTrack(id);
 	}
-
-
 	
 	public void end() {
 		System.out.println("Bye!");
 		scanner.close();
 		artistsDao.close();
 	}
-	
 }

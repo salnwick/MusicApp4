@@ -24,8 +24,4 @@ public class Tracks {
 	public void setTrack(String track) {
 		this.track = track;
 	}
-
-
-
-	
 }

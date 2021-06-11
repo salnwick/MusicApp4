@@ -17,7 +17,7 @@ album_id int(11) not null auto_increment,
 album varchar(25) not null,
 artist_id int(11) not null,
 primary key(album_id),
-foreign key(artist_id) references Artists(artist_id)
+foreign key(artist_id) references Artists(artist_id) ON DELETE cascade
 );
 
 create table if not exists Tracks(
@@ -26,6 +26,6 @@ track varchar(25) not null,
 artist_id int(11) not null,
 album_id int(11) not null,
 primary key(track_id),
-foreign key(artist_id) references Artists(artist_id),
-foreign key(album_id) references Albums(album_id)
+foreign key(artist_id) references Artists(artist_id) ON DELETE cascade,
+foreign key(album_id) references Albums(album_id) ON DELETE cascade
 );
